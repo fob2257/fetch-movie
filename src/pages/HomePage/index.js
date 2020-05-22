@@ -7,8 +7,12 @@ import {
   TextField,
   Button
 } from '@material-ui/core';
+import { Movie as MovieIcon } from '@material-ui/icons';
+
+import useStyles from './styles';
 
 const HomePage = () => {
+  const classes = useStyles();
   const [searchText, setSearchText] = useState('');
 
   const handleOnTextChange = ({ target: { value } }) => setSearchText(value);
@@ -16,20 +20,23 @@ const HomePage = () => {
   const handleOnClear = () => setSearchText('');
 
   return (
-    <Container>
-      <Card>
-        <Grid container>
+    <Container className={classes.container}>
+      <Card className={classes.cardContainer}>
+        <Grid container className={classes.titleGridContainer}>
           <Grid>
-            <Typography>Welcome</Typography>
+            <Typography className={classes.title}>Welcome</Typography>
           </Grid>
-          <Grid></Grid>
+          <Grid>
+            <MovieIcon className={classes.movieIcon} />
+          </Grid>
         </Grid>
         <TextField
           label="Search"
           value={searchText}
           onChange={handleOnTextChange}
+          className={classes.textField}
         />
-        <Grid>
+        <Grid className={classes.buttonsGridContainer}>
           <Button
             variant="contained"
             onClick={handleOnClear}
@@ -37,7 +44,11 @@ const HomePage = () => {
           >
             Clear
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.searchButton}
+          >
             Go
           </Button>
         </Grid>
