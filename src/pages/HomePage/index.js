@@ -1,45 +1,49 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import {
+  Container,
+  Card,
+  Grid,
+  Typography,
+  TextField,
+  Button
+} from '@material-ui/core';
 
-import { getDemoRequest } from '../../redux/actions/demoActions';
+const HomePage = () => {
+  const [searchText, setSearchText] = useState('');
 
-import User from '../../components/User';
+  const handleOnTextChange = ({ target: { value } }) => setSearchText(value);
 
-let willMount = true;
-
-const HomePage = ({ users, getDemoRequest }) => {
-  if (willMount) getDemoRequest('hey');
-
-  useEffect(() => {
-    willMount = false;
-  }, []);
+  const handleOnClear = () => setSearchText('');
 
   return (
-    <div>
-      {users.map((value, i) => (
-        <User key={i} {...value} />
-      ))}
-    </div>
+    <Container>
+      <Card>
+        <Grid container>
+          <Grid>
+            <Typography>Welcome</Typography>
+          </Grid>
+          <Grid></Grid>
+        </Grid>
+        <TextField
+          label="Search"
+          value={searchText}
+          onChange={handleOnTextChange}
+        />
+        <Grid>
+          <Button
+            variant="contained"
+            onClick={handleOnClear}
+            disabled={!searchText.length}
+          >
+            Clear
+          </Button>
+          <Button variant="contained" color="primary">
+            Go
+          </Button>
+        </Grid>
+      </Card>
+    </Container>
   );
 };
 
-HomePage.propTypes = {
-  users: PropTypes.array,
-  getDemoRequest: PropTypes.func
-};
-
-HomePage.defaultProps = {
-  users: [],
-  getDemoRequest: f => f
-};
-
-const mapStateToProps = state => ({
-  users: state.demo
-});
-
-const mapDispatchToProps = dispatch => ({
-  getDemoRequest: payload => dispatch(getDemoRequest(payload))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;
