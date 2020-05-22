@@ -5,13 +5,15 @@ import ReduxProvider from './redux';
 
 import HomePage from './pages/HomePage';
 import ResultsPage from './pages/ResultsPage';
+import ResultDetailPage from './pages/ResultDetailPage';
 
 const App = () => (
   <ReduxProvider>
     <Router>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/results" component={ResultsPage} />
+        <Route exact path="/results" component={ResultsPage} />
+        <Route path="/results/:id" component={ResultDetailPage} />
       </Switch>
     </Router>
   </ReduxProvider>

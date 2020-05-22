@@ -1,24 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Grid, Typography, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
-const MovieCard = ({ Title, Year, Type, Poster }) => (
-  <Card>
-    <Grid container>
-      <Grid item>
-        <img src={Poster} alt={Title} />
+import useStyles from './styles';
+
+const MovieCard = ({ Title, Year, imdbID, Type, Poster }) => {
+  const classes = useStyles();
+  const history = useHistory();
+
+  const handleSeeMore = () => history.push(`results/${imdbID}`);
+
+  return (
+    <Card className={classes.cardContainer}>
+      <Grid container>
+        <Grid item>
+          <img src={Poster} alt={Title} className={classes.poster} />
+        </Grid>
+        <Grid item className={classes.titleGridContainer}>
+          <Typography>{Title}</Typography>
+          <Typography>{Year}</Typography>
+          <Typography>{Type}</Typography>
+          <Button variant="contained" color="primary" onClick={handleSeeMore}>
+            See more
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Typography>{Title}</Typography>
-        <Typography>{Year}</Typography>
-        <Typography>{Type}</Typography>
-        <Button variant="contained" color="primary">
-          See more
-        </Button>
-      </Grid>
-    </Grid>
-  </Card>
-);
+    </Card>
+  );
+};
 
 MovieCard.propTypes = {
   Title: PropTypes.any,
