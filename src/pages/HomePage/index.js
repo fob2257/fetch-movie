@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Container,
   Card,
@@ -11,13 +12,15 @@ import { Movie as MovieIcon } from '@material-ui/icons';
 
 import useStyles from './styles';
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
   const classes = useStyles();
   const [searchText, setSearchText] = useState('');
 
   const handleOnTextChange = ({ target: { value } }) => setSearchText(value);
 
   const handleOnClear = () => setSearchText('');
+
+  const handleOnSearch = () => history.push(`/results?name=${searchText}`);
 
   return (
     <Container className={classes.container}>
@@ -47,6 +50,7 @@ const HomePage = () => {
           <Button
             variant="contained"
             color="primary"
+            onClick={handleOnSearch}
             className={classes.searchButton}
           >
             Go
@@ -55,6 +59,10 @@ const HomePage = () => {
       </Card>
     </Container>
   );
+};
+
+HomePage.propTypes = {
+  history: PropTypes.object
 };
 
 export default HomePage;
