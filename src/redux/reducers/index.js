@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import demoReducers from './demoReducers';
+import searchReducers from './searchReducers';
 
 const rootReducer = combineReducers({
-  demo: demoReducers
+  search: searchReducers
 });
 
 export default rootReducer;

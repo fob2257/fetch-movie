@@ -1,7 +1,7 @@
 import { all, call } from 'redux-saga/effects';
 
-import demoSagas from './demoSagas';
+import searchSagas from './searchSagas';
 
 export default function* () {
-  yield all([demoSagas].map(saga => call(saga)));
+  yield all([searchSagas].map(saga => call(saga)));
 }
